@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#FF6B6B" />
+  <title>Privacy Policy — HabitFlow</title>
+  <style>
+    :root {
+      --bg: #FFF8F2;
+      --surface: #FFFFFF;
+      --text: #1F1B17;
+      --muted: #6B6963;
+      --primary: #FF6B6B;
+      --secondary: #FFB36B;
+      --tertiary: #24C58F;
+      --border: rgba(0, 0, 0, 0.08);
+      --shadow: rgba(0, 0, 0, 0.07);
+    }
+    body.dark {
+      --bg: #14110F;
+      --surface: #1F1B17;
+      --text: #FAFAFA;
+      --muted: #B5B1AA;
+      --border: rgba(255, 255, 255, 0.10);
+      --shadow: rgba(0, 0, 0, 0.5);
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 0 18px 40px;
+    }
+    .hero {
+      margin: 0 -18px 22px;
+      padding: 32px 24px 26px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 55%, var(--tertiary) 100%);
+      border-radius: 0 0 28px 28px;
+      box-shadow: 0 14px 32px var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 220px; height: 220px;
+      right: -60px; top: -60px;
+      background: radial-gradient(circle, rgba(255,255,255,0.22), transparent 70%);
+      border-radius: 50%;
+    }
+    .hero .eyebrow {
+      font-size: 11px; letter-spacing: 2.5px; font-weight: 800;
+      opacity: 0.95; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: 28px; margin: 8px 0 4px; font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+    .hero .meta { font-size: 12.5px; opacity: 0.92; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px 18px 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 18px var(--shadow);
+    }
+    .card h2 {
+      font-size: 15px;
+      font-weight: 800;
+      margin: 0 0 8px;
+      letter-spacing: 0.2px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card h2 .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--tertiary));
+      display: inline-block;
+    }
+    .card p, .card li { color: var(--text); margin: 4px 0; }
+    .card ul { margin: 6px 0 4px; padding-left: 20px; }
+    .card li { margin: 3px 0; }
+    .card .muted { color: var(--muted); font-size: 13px; }
+    .footer {
+      margin-top: 26px;
+      padding: 22px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      text-align: center;
+      box-shadow: 0 6px 18px var(--shadow);
+    }
+    .footer .by { font-size: 11px; letter-spacing: 2.5px; color: var(--muted); font-weight: 800; }
+    .footer .studio {
+      font-weight: 800; font-size: 20px; letter-spacing: 3px;
+      background: linear-gradient(135deg, var(--primary), var(--tertiary));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      margin: 2px 0 14px;
+    }
+    .footer .label { font-size: 12.5px; color: var(--muted); margin: 0 0 8px; }
+    .email-pill {
+      display: inline-block;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff !important;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      box-shadow: 0 8px 18px var(--shadow);
+      min-height: 44px;
+      line-height: 20px;
+    }
+    .footer .copy { font-size: 12px; color: var(--muted); margin-top: 14px; }
+    a { color: var(--primary); }
+
+    /* Enhanced Mobile Responsiveness */
+    @media (max-width: 480px) {
+      body {
+        font-size: 14.5px;
+      }
+      main {
+        padding: 0 12px 30px;
+      }
+      .hero {
+        margin: 0 -12px 18px;
+        padding: 28px 18px 22px;
+        border-radius: 0 0 24px 24px;
+      }
+      .hero h1 {
+        font-size: 24px;
+      }
+      .card {
+        padding: 16px 16px 12px;
+        border-radius: 16px;
+        margin-bottom: 12px;
+      }
+      .email-pill {
+        display: block;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        text-align: center;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="eyebrow">HabitFlow</div>
+    <h1>Privacy Policy</h1>
+    <div class="meta">Last updated · 21 June 2026</div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2><span class="dot"></span>The short version</h2>
+      <ul>
+        <li>No accounts. No ads. No analytics.</li>
+        <li>Your habits stay on your phone.</li>
+        <li>One tiny request for a daily quote — nothing about you is sent.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>What we store</h2>
+      <p>Habits, streaks, badges, notes, and settings live in a local database on your device. We never see them. Uninstalling the app removes them.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>Backups</h2>
+      <p>"Save backup" creates a JSON file you choose where to put. We don't see or store it.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>The one network call</h2>
+      <p>Each time you open the app we fetch one motivational quote from the public ZenQuotes service. The request is anonymous — no identifiers go with it.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>Permissions</h2>
+      <ul>
+        <li><strong>Notifications</strong> — so reminders pop up.</li>
+        <li><strong>Exact alarms</strong> — so reminders fire on time.</li>
+        <li><strong>Internet</strong> — only for the daily quote above.</li>
+        <li><strong>Boot</strong> — so reminders survive restarts.</li>
+      </ul>
+      <p class="muted">You can revoke any of these in Android Settings.</p>
+    </div>
+
+    <div class="footer">
+      <div class="by">DEVELOPED BY</div>
+      <div class="studio">SDX STUDIO</div>
+      <p class="label">Questions? Email us:</p>
+      <a class="email-pill" href="mailto:rahilwani8090@gmail.com?subject=HabitFlow%20Privacy">rahilwani8090@gmail.com</a>
+      <div class="copy">© 2026 SDX STUDIO · Stay in the flow.</div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var qs = new URLSearchParams(window.location.search);
+      var pref = qs.get('theme');
+      var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (pref === 'dark' || (pref !== 'light' && systemDark)) {
+        document.body.classList.add('dark');
+      }
+    })();
+  </script>
+</body>
+</html>
