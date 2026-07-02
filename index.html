@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HabitFlow — Streamline Your Habits, Transform Your Life</title>
+    <meta name="description" content="An elegant, distraction-free habit tracker designed to help you build consistency, track progress, and achieve your daily goals.">
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #0C0A09;
+            --surface: #1C1917;
+            --surface-glass: rgba(28, 25, 23, 0.7);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            --text: #F5F5F4;
+            --text-muted: #A8A29E;
+            
+            /* Theme Gradient Colors */
+            --primary: #FF6B6B;
+            --secondary: #FFB36B;
+            --tertiary: #24C58F;
+            --accent: #A670FF;
+            
+            --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Ambient Background Glows */
+        .glow {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(130px);
+            opacity: 0.4;
+        }
+
+        .glow-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            top: -150px;
+            left: -150px;
+        }
+
+        .glow-2 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            top: 20%;
+            right: -200px;
+        }
+
+        .glow-3 {
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, var(--tertiary) 0%, transparent 70%);
+            bottom: -100px;
+            left: -100px;
+        }
+
+        /* Layout Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Navbar */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(12, 10, 9, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 76px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 800;
+            font-size: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 9px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .logo-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            color: var(--text);
+        }
+
+        .btn-cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #FFFFFF;
+            padding: 10px 22px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 20px rgba(255, 107, 107, 0.2);
+            transition: var(--transition);
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 80px;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        @media (max-width: 968px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+            .hero-actions {
+                justify-content: center;
+            }
+        }
+
+        .tagline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .tagline-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(255, 107, 107, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FFF 30%, #E7E5E4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            max-width: 540px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 12px 24px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--border-hover);
+        }
+
+        /* Interactive Tracker Widget */
+        .interactive-widget {
+            background: var(--surface-glass);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            max-width: 440px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .widget-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .widget-title {
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .widget-progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 33%;
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .habit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .habit-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .habit-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--border-hover);
+            transform: translateX(4px);
+        }
+
+        .habit-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .habit-checkbox {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            border: 2px solid var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .habit-checkbox svg {
+            width: 12px;
+            height: 12px;
+            fill: none;
+            stroke: white;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0;
+            transform: scale(0.6);
+            transition: var(--transition);
+        }
+
+        .habit-name {
+            font-weight: 500;
+            font-size: 15px;
+            transition: var(--transition);
+        }
+
+        .habit-streak {
+            font-size: 12px;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        /* Completed Habit State */
+        .habit-item.completed {
+            border-color: rgba(36, 197, 143, 0.3);
+            background: rgba(36, 197, 143, 0.04);
+        }
+
+        .habit-item.completed .habit-checkbox {
+            background-color: var(--tertiary);
+            border-color: var(--tertiary);
+        }
+
+        .habit-item.completed .habit-checkbox svg {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .habit-item.completed .habit-name {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            border-top: 1px solid var(--border);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-size: 40px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 16px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: var(--surface-glass);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 32px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), transparent);
+            opacity: 0;
+            transition: var(--transition);
+            pointer-events: none;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--border-hover);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+
+        .feature-card:nth-child(2) .feature-icon { color: var(--secondary); }
+        .feature-card:nth-child(3) .feature-icon { color: var(--tertiary); }
+        .feature-card:nth-child(4) .feature-icon { color: var(--accent); }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        /* Call To Action Footer Section */
+        .cta-section {
+            padding: 100px 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            position: relative;
+        }
+
+        .cta-content {
+            max-width: 680px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(28, 25, 23, 0.8) 0%, rgba(12, 10, 9, 0.9) 100%);
+            border: 1px solid var(--border);
+            padding: 60px 40px;
+            border-radius: 36px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(16px);
+        }
+
+        .cta-content h2 {
+            font-size: 44px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        .cta-content p {
+            color: var(--text-muted);
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 48px 0;
+            background: #080605;
+        }
+
+        .footer-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-logo {
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-logo .logo-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 7px;
+        }
+
+        .footer-logo .logo-icon svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .footer-link:hover {
+            color: var(--text);
+        }
+
+        .copyright {
+            color: #78716C;
+            font-size: 13px;
+            width: 100%;
+            text-align: center;
+            margin-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            padding-top: 24px;
+        }
+
+        @media (max-width: 640px) {
+            .footer-wrapper {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-links {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .hero h1 {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Glow Blobs -->
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    </div>
+                    <span>HabitFlow</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="privacypolicy.html" class="nav-link">Privacy Policy</a></li>
+                    <li><a href="terms.html" class="nav-link">Terms</a></li>
+                </ul>
+                <a href="#cta" class="btn-cta">Download App</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="tagline">
+                        <div class="tagline-dot"></div>
+                        <span>Unlock Your Full Potential</span>
+                    </div>
+                    <h1>Master your habits,<br><span>Simplify your life.</span></h1>
+                    <p class="hero-desc">HabitFlow helps you construct a productive daily routine, build unbreakable streaks, and unlock healthy habits with a clean, offline-first interface designed for real progress.</p>
+                    <div class="hero-actions">
+                        <a href="#cta" class="btn-cta" style="padding: 14px 28px; font-size: 15px;">Get Started Free</a>
+                        <a href="#features" class="btn-secondary">Explore Features</a>
+                    </div>
+                </div>
+                
+                <!-- Interactive Preview Widget -->
+                <div class="hero-preview">
+                    <div class="interactive-widget">
+                        <div class="widget-header">
+                            <span class="widget-title">Today's Habits</span>
+                            <div class="widget-progress">
+                                <span id="progress-text">1 of 3 Done</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Progress Bar -->
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="progress-fill"></div>
+                        </div>
+                        
+                        <!-- Habits List -->
+                        <div class="habit-list">
+                            <div class="habit-item completed" onclick="toggleHabit(this, 1)">
+                                <div class="habit-info">
+                                    <div class="habit-checkbox">
+                                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </div>
+                                    <span class="habit-name">Morning Meditation</span>
+                                </div>
+                                <span class="habit-streak">🔥 12d</span>
+                            </div>
+                            
+                            <div class="habit-item" onclick="toggleHabit(this, 2)">
+                                <div class="habit-info">
+                                    <div class="habit-checkbox">
+                                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </div>
+                                    <span class="habit-name">Drink 3L Water</span>
+                                </div>
+                                <span class="habit-streak">🔥 5d</span>
+                            </div>
+
+                            <div class="habit-item" onclick="toggleHabit(this, 3)">
+                                <div class="habit-info">
+                                    <div class="habit-checkbox">
+                                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                    </div>
+                                    <span class="habit-name">Read 10 Pages</span>
+                                </div>
+                                <span class="habit-streak">🔥 8d</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Designed for Consistency</h2>
+                <p>Everything you need to systematically organize your day, build positive cycles, and break bad patterns without any distractions.</p>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Card 1: Easy Tracker -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <h3>Intuitive Habit Building</h3>
+                    <p>Build and categorize habits easily with customized daily, weekly, or specific interval schedules tailored to your lifestyle.</p>
+                </div>
+
+                <!-- Card 2: Streak Tracking -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    </div>
+                    <h3>Streak Protection</h3>
+                    <p>Track your completion statistics with daily streaks. Visualize your progress patterns and keep your consistency momentum going.</p>
+                </div>
+
+                <!-- Card 3: Offline-First -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93z"/></svg>
+                    </div>
+                    <h3>Private & Offline-First</h3>
+                    <p>Your habits are your own business. All habit data is stored securely and completely offline on your local device for maximum privacy.</p>
+                </div>
+
+                <!-- Card 4: Smart Insights -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                    </div>
+                    <h3>Insightful Analytics</h3>
+                    <p>Gain deep knowledge with beautiful analytics, charts, and habits completion matrices to find your peak performance days.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta-section" id="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Start Flowing Today</h2>
+                <p>Download HabitFlow now and start tracking your path to a healthier, happier, and more consistent lifestyle. No ads, no tracking, just progress.</p>
+                <a href="#" class="btn-cta" style="padding: 16px 36px; font-size: 16px;">Download HabitFlow</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-wrapper">
+                <a href="#" class="footer-logo">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    </div>
+                    <span>HabitFlow</span>
+                </a>
+                
+                <ul class="footer-links">
+                    <li><a href="#features" class="footer-link">Features</a></li>
+                    <li><a href="privacypolicy.html" class="footer-link">Privacy Policy</a></li>
+                    <li><a href="terms.html" class="footer-link">Terms and Conditions</a></li>
+                </ul>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2026 HabitFlow App. All rights reserved. Designed for consistency.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Widget Script -->
+    <script>
+        function toggleHabit(element, id) {
+            element.classList.toggle('completed');
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const habits = document.querySelectorAll('.habit-item');
+            const completedHabits = document.querySelectorAll('.habit-item.completed');
+            
+            const total = habits.length;
+            const completed = completedHabits.length;
+            
+            // Update progress text
+            const progressText = document.getElementById('progress-text');
+            progressText.innerText = `${completed} of ${total} Done`;
+            
+            // Update progress fill bar width
+            const percentage = (completed / total) * 100;
+            const progressFill = document.getElementById('progress-fill');
+            progressFill.style.width = `${percentage}%`;
+        }
+    </script>
+</body>
+</html>
