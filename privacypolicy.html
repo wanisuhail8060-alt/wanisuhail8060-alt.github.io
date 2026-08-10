@@ -158,43 +158,104 @@
   <header class="hero">
     <div class="eyebrow">HabitFlow</div>
     <h1>Privacy Policy</h1>
-    <div class="meta">Last updated · 21 June 2026</div>
+    <div class="meta">Last updated · 10 August 2026</div>
   </header>
 
   <main>
     <div class="card">
       <h2><span class="dot"></span>The short version</h2>
       <ul>
-        <li>No accounts.No analytics.</li>
-        <li>Your habits stay on your phone.</li>
-        <li>One tiny request for a daily quote — nothing about you is sent.</li>
+        <li>Accounts are optional — you can use HabitFlow fully offline.</li>
+        <li>If you sign in, your habits back up to a secure cloud database so you can restore them on another device.</li>
+        <li>We don't sell your data. We don't run analytics or trackers.</li>
+        <li>Ads are shown to keep the app free.</li>
       </ul>
     </div>
 
     <div class="card">
-      <h2><span class="dot"></span>What we store</h2>
-      <p>Habits, streaks, badges, notes, and settings live in a local database on your device. We never see them. Uninstalling the app removes them.</p>
+      <h2><span class="dot"></span>Two ways to use HabitFlow</h2>
+      <p><strong>Local-only.</strong> Skip sign-in and everything — habits, check-ins, streaks, notes, badges, and settings — stays on your device only. Nothing about you leaves the phone.</p>
+      <p><strong>Signed in with Google.</strong> You get cloud backup and multi-device sync. See the sections below for exactly what we store and where.</p>
     </div>
 
     <div class="card">
-      <h2><span class="dot"></span>Backups</h2>
-      <p>"Save backup" creates a JSON file you choose where to put. We don't see or store it.</p>
+      <h2><span class="dot"></span>What stays on your device</h2>
+      <p>The following live in a local database on your phone regardless of whether you sign in:</p>
+      <ul>
+        <li>Your habits (title, emoji, color, cadence, reminder times, description).</li>
+        <li>Check-ins, streaks, badges, and streak-freeze usage.</li>
+        <li>Missed-day reasons and notes you add.</li>
+        <li>App settings (theme, accent, text size, haptics, motivation preferences).</li>
+        <li>Your chosen username and, if you set one, your profile avatar image.</li>
+      </ul>
+      <p class="muted">Uninstalling the app removes all of the above from the device.</p>
     </div>
 
     <div class="card">
-      <h2><span class="dot"></span>The one network call</h2>
-      <p>Each time you open the app we fetch one motivational quote from the public ZenQuotes service. The request is anonymous — no identifiers go with it.</p>
+      <h2><span class="dot"></span>What we store in the cloud (only if you sign in)</h2>
+      <p>Signing in with Google creates an account tied to your Google user ID. We store the following in a secure cloud database so you can restore your data on any device you sign into:</p>
+      <ul>
+        <li><strong>Account profile</strong> — your Google user ID, email address, display name, a chosen username (handle), your device's time zone, and your avatar image (if you upload one).</li>
+        <li><strong>Habits</strong> — title, emoji, color, cadence, reminder times, target per period, order, archive/delete status, and timestamps.</li>
+        <li><strong>Check-ins</strong> — the date, source (manual / widget / notification), and any note you added.</li>
+        <li><strong>Streak freezes</strong> — habit ID and the date the freeze covers.</li>
+        <li><strong>Weekly challenges</strong> — your progress on in-app challenges.</li>
+        <li><strong>Sync bookkeeping</strong> — the last time your device pushed or pulled data, and hashes used to skip redundant uploads.</li>
+        <li><strong>A push-notification token</strong> — a device token used to send you notifications you've opted into (for example, streak-at-risk pings).</li>
+      </ul>
+      <p class="muted">We never see your Google password. Sign-in happens through Google's own credential flow.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>Ads</h2>
+      <p>HabitFlow shows ads through Google AdMob to keep the app free. AdMob is a third-party service run by Google and may collect an advertising ID and other device signals to serve relevant ads. You can limit ad personalization in your Android Settings under <em>Privacy → Ads</em>.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>Third-party services we use</h2>
+      <ul>
+        <li><strong>Google Sign-In</strong> — optional account creation.</li>
+        <li><strong>Cloud database &amp; storage</strong> — hosts your synced data and avatar when signed in.</li>
+        <li><strong>Firebase Cloud Messaging</strong> — delivers push notifications.</li>
+        <li><strong>Google AdMob</strong> — serves in-app ads.</li>
+        <li><strong>ZenQuotes</strong> — anonymous request for the daily motivational quote.</li>
+      </ul>
+      <p class="muted">Each service has its own privacy policy. We share only the minimum needed for the feature to work.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>Local backups</h2>
+      <p>"Save backup" creates a JSON file you choose where to put. It never touches our servers — it stays wherever you save it.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>Your rights &amp; controls</h2>
+      <ul>
+        <li><strong>Sign out</strong> at any time from Settings — the app keeps your local data and stops syncing.</li>
+        <li><strong>Delete your account</strong> from Settings — this wipes your profile, all synced rows, and your stored avatar from the cloud, then clears your device.</li>
+        <li><strong>Export</strong> your data locally via "Save backup" whenever you want.</li>
+      </ul>
     </div>
 
     <div class="card">
       <h2><span class="dot"></span>Permissions</h2>
       <ul>
-        <li><strong>Notifications</strong> — so reminders pop up.</li>
-        <li><strong>Exact alarms</strong> — so reminders fire on time.</li>
-        <li><strong>Internet</strong> — only for the daily quote above.</li>
+        <li><strong>Notifications</strong> — so reminders and push notifications appear.</li>
+        <li><strong>Exact alarms</strong> — so habit reminders fire on time.</li>
+        <li><strong>Internet</strong> — for cloud sync, sign-in, ads, push notifications, and the daily quote.</li>
         <li><strong>Boot</strong> — so reminders survive restarts.</li>
       </ul>
       <p class="muted">You can revoke any of these in Android Settings.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>Children</h2>
+      <p>HabitFlow is not directed at children under 13. We do not knowingly collect data from children.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>Changes to this policy</h2>
+      <p>If we make meaningful changes, we'll update the date at the top and, where appropriate, prompt you in the app.</p>
     </div>
 
     <div class="footer">
