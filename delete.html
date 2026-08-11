@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#FF6B6B" />
+  <title>Delete Your Account — HabitFlow</title>
+  <style>
+    :root {
+      --bg: #FFF8F2;
+      --surface: #FFFFFF;
+      --text: #1F1B17;
+      --muted: #6B6963;
+      --primary: #FF6B6B;
+      --secondary: #FFB36B;
+      --tertiary: #24C58F;
+      --border: rgba(0, 0, 0, 0.08);
+      --shadow: rgba(0, 0, 0, 0.07);
+    }
+    body.dark {
+      --bg: #14110F;
+      --surface: #1F1B17;
+      --text: #FAFAFA;
+      --muted: #B5B1AA;
+      --border: rgba(255, 255, 255, 0.10);
+      --shadow: rgba(0, 0, 0, 0.5);
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    main {
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 0 18px 40px;
+    }
+    .hero {
+      margin: 0 -18px 22px;
+      padding: 32px 24px 26px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 55%, var(--tertiary) 100%);
+      border-radius: 0 0 28px 28px;
+      box-shadow: 0 14px 32px var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 220px; height: 220px;
+      right: -60px; top: -60px;
+      background: radial-gradient(circle, rgba(255,255,255,0.22), transparent 70%);
+      border-radius: 50%;
+    }
+    .hero .eyebrow {
+      font-size: 11px; letter-spacing: 2.5px; font-weight: 800;
+      opacity: 0.95; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: 28px; margin: 8px 0 4px; font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+    .hero .meta { font-size: 12.5px; opacity: 0.92; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px 18px 14px;
+      margin-bottom: 14px;
+      box-shadow: 0 6px 18px var(--shadow);
+    }
+    .card h2 {
+      font-size: 15px;
+      font-weight: 800;
+      margin: 0 0 8px;
+      letter-spacing: 0.2px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .card h2 .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--tertiary));
+      display: inline-block;
+    }
+    .card p, .card li { color: var(--text); margin: 4px 0; }
+    .card ul, .card ol { margin: 6px 0 4px; padding-left: 22px; }
+    .card li { margin: 4px 0; }
+    .card .muted { color: var(--muted); font-size: 13px; }
+    .steps { counter-reset: step; list-style: none; padding-left: 0; margin: 8px 0 4px; }
+    .steps li {
+      position: relative;
+      padding: 10px 12px 10px 44px;
+      margin: 8px 0;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+    .steps li::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 10px; top: 50%;
+      transform: translateY(-50%);
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff;
+      font-size: 13px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 10px var(--shadow);
+    }
+    .footer {
+      margin-top: 26px;
+      padding: 22px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      text-align: center;
+      box-shadow: 0 6px 18px var(--shadow);
+    }
+    .footer .by { font-size: 11px; letter-spacing: 2.5px; color: var(--muted); font-weight: 800; }
+    .footer .studio {
+      font-weight: 800; font-size: 20px; letter-spacing: 3px;
+      background: linear-gradient(135deg, var(--primary), var(--tertiary));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      margin: 2px 0 14px;
+    }
+    .footer .label { font-size: 12.5px; color: var(--muted); margin: 0 0 8px; }
+    .email-pill {
+      display: inline-block;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #fff !important;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      box-shadow: 0 8px 18px var(--shadow);
+      min-height: 44px;
+      line-height: 20px;
+    }
+    .footer .copy { font-size: 12px; color: var(--muted); margin-top: 14px; }
+    a { color: var(--primary); }
+
+    @media (max-width: 480px) {
+      body { font-size: 14.5px; }
+      main { padding: 0 12px 30px; }
+      .hero {
+        margin: 0 -12px 18px;
+        padding: 28px 18px 22px;
+        border-radius: 0 0 24px 24px;
+      }
+      .hero h1 { font-size: 24px; }
+      .card {
+        padding: 16px 16px 12px;
+        border-radius: 16px;
+        margin-bottom: 12px;
+      }
+      .email-pill {
+        display: block;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        text-align: center;
+        box-sizing: border-box;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="eyebrow">HabitFlow</div>
+    <h1>Delete Your Account</h1>
+    <div class="meta">Last updated · 11 August 2026</div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2><span class="dot"></span>The short version</h2>
+      <ul>
+        <li>You can delete your HabitFlow account and all synced data at any time.</li>
+        <li>The fastest way is right inside the app — one tap in Settings.</li>
+        <li>If you can't access the app, you can email us and we'll do it for you.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>Delete from inside the app</h2>
+      <ol class="steps">
+        <li>Open <strong>HabitFlow</strong> on your device.</li>
+        <li>Go to <strong>Settings</strong> (bottom navigation).</li>
+        <li>Scroll to <strong>Account</strong> and tap <strong>Delete account</strong>.</li>
+        <li>Confirm the prompt. Your cloud data is wiped immediately and the app clears itself on this device.</li>
+      </ol>
+      <p class="muted">Signed out already? Sign back in with the same Google account first, then follow the steps above.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>Request deletion by email</h2>
+      <p>If you can't open the app or would prefer we handle it, send us an email from the address tied to your HabitFlow account and we'll delete it manually within <strong>7 days</strong>.</p>
+      <p>Please include:</p>
+      <ul>
+        <li>The subject line: <strong>Delete my HabitFlow account</strong></li>
+        <li>The Google email address you signed in with</li>
+        <li>Your HabitFlow username (if you remember it)</li>
+      </ul>
+      <p style="margin-top: 12px;">
+        <a class="email-pill" href="mailto:rahilwani8090@gmail.com?subject=Delete%20my%20HabitFlow%20account&body=Please%20delete%20my%20HabitFlow%20account.%0A%0AGoogle%20email%3A%20%0AHabitFlow%20username%3A%20">Email a deletion request</a>
+      </p>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>What gets deleted</h2>
+      <p>When your account is deleted, the following are permanently removed from our cloud database and storage:</p>
+      <ul>
+        <li>Your account profile — Google user ID, email, display name, username, time zone, avatar image.</li>
+        <li>All synced habits, check-ins, streak freezes, and weekly-challenge progress.</li>
+        <li>Sync bookkeeping and any push-notification token tied to your account.</li>
+      </ul>
+      <p class="muted">Deletion is immediate and cannot be undone. If you want to keep a copy, use <strong>Settings → Save backup</strong> before deleting.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>What stays on your device</h2>
+      <p>Deleting your cloud account does not touch data stored on other people's devices. On the device where you delete, the app also clears the local database as part of the flow. If you want a fully clean slate, you can uninstall HabitFlow afterwards.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>Data retention</h2>
+      <ul>
+        <li><strong>Account &amp; synced data:</strong> deleted immediately upon your request. No copies are retained.</li>
+        <li><strong>Backups:</strong> any encrypted infrastructure backups roll off within <strong>30 days</strong>.</li>
+        <li><strong>Legal / abuse logs:</strong> we may retain minimal records only where required by law.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2><span class="dot"></span>Have questions first?</h2>
+      <p>Read our <a href="privacypolicy.html">Privacy Policy</a> to see exactly what HabitFlow stores, or email us before deleting if you want us to walk you through it.</p>
+    </div>
+
+    <div class="footer">
+      <div class="by">DEVELOPED BY</div>
+      <div class="studio">SDX STUDIO</div>
+      <p class="label">Need help with deletion? Email us:</p>
+      <a class="email-pill" href="mailto:rahilwani8090@gmail.com?subject=Delete%20my%20HabitFlow%20account">rahilwani8090@gmail.com</a>
+      <div class="copy">© 2026 SDX STUDIO · Stay in the flow.</div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var qs = new URLSearchParams(window.location.search);
+      var pref = qs.get('theme');
+      var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (pref === 'dark' || (pref !== 'light' && systemDark)) {
+        document.body.classList.add('dark');
+      }
+    })();
+  </script>
+</body>
+</html>
